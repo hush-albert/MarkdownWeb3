@@ -21,26 +21,53 @@ web3 是一個新一代的互聯網架構，它基於區塊鏈技術，旨在創
     - 獨家內容：會員可以訪問專屬的內容或活動。
     - 社群與交流：會員可以參與專屬的社群活動，促進交流和合作。
 
-https://youtu.be/S4CP1MHCE2Q
+<table>
+  <tr>
+    <td>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/S4CP1MHCE2Q" frameborder="0" allowfullscreen></iframe>
+    </td>
+    <td>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/6stVpjcko2A" frameborder="0" allowfullscreen></iframe>
+    </td>
+  </tr>
+</table>
 
-https://youtu.be/6stVpjcko2A
 # AI
 就從我們的網址名稱 m-data 聊起吧，原意是 my data 也就是 數位足跡，我們要做自己數位足跡的主人。剛才看了一段微軟 CEO 的談話，那還真是當頭棒喝！講的誇張一點，他說應用軟體已死，未來的 AI 就是 agent，我們只要告訴 agent 我們想要的，AI 就可以從資料庫中完成我們的指令。以往的軟體夾在使用者與資料中間，現在的 agent 這麼厲害，那還要什麼應用軟體？
 
 未來的世界除了資料以外還剩下什麼嗎？AI 有了資料以後它還缺什麼嗎？科技巨頭們掌握最了先進的 AI 又透過 Web 2.0 長期從我們身上偷走了大部分的資料，現在的我們還有什麼能力反抗嗎？前一陣子才發現可以在 Excel 裡寫 Python，搞清楚才知道是咱們自作多情，原來 Python 是給 Copilot 用的。
 
 微軟還真是一家厲害的公司！
-
-https://youtu.be/SJi4VE-0MoA
-
-https://youtu.be/uGOLYz2pgr8
-
-https://youtu.be/kMBjzxKYWw4
-
-https://youtu.be/_6R7Ym6Vy_I
-
-https://youtu.be/wjZofJX0v4M
-
-https://youtu.be/eMlx5fFNoYc
-
-https://youtu.be/Gn64NNr3bqU
+<table>
+  <tr>
+    <td>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/SJi4VE-0MoA" frameborder="0" allowfullscreen></iframe>
+    </td>
+    <td>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/uGOLYz2pgr8" frameborder="0" allowfullscreen></iframe>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/kMBjzxKYWw4" frameborder="0" allowfullscreen></iframe>
+    </td>
+    <td>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/_6R7Ym6Vy_I" frameborder="0" allowfullscreen></iframe>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/wjZofJX0v4M" frameborder="0" allowfullscreen></iframe>
+    </td>
+    <td>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/eMlx5fFNoYc" frameborder="0" allowfullscreen></iframe>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/Gn64NNr3bqU" frameborder="0" allowfullscreen></iframe>
+    </td>
+    <td>
+    </td>
+  </tr>
+</table>
