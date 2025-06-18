@@ -21,7 +21,9 @@ You can find the source code for Jekyll at GitHub:
 # web3
 web3 是一個新一代的互聯網架構，它基於區塊鏈技術，旨在創建一個去中心化、分散式的網絡。在 web3 中，用戶可以直接控制自己的數據和資產，而不是通過中央機構或平台來進行管理。這樣的設計有助於增強隱私和安全性，並且可以促進更多元化和透明的網絡生態系統。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/r_-TAsVbb7M" frameborder="0" allowfullscreen></iframe>
+<div class="video-container">
+<iframe width="300" height="200" src="https://www.youtube.com/embed/r_-TAsVbb7M" frameborder="0" allowfullscreen></iframe>
+</div>
 
 # 數位分身 (DID)<br>The Web3 Membership System
 會員通常是指某個組織、公司、俱樂部或平台的註冊成員或參與者。會員制旨在提供特定的權益、福利或服務，這些權益通常僅對會員開放。以下是會員的一些常見定義和特點：

@@ -34,7 +34,7 @@
             {%- if page.order -%}
             <!-- # Copilot: 不在 root 的 Jekyll github pages 首頁問題
             -->
-            <a class="page-link" href="{{ page.url | relative_url }}">{{ page.title }}</a>
+            <a class="page-link" href="{{ page.url | relative_url }}">{{ page.title | escape }}</a>
             {%- endif -%}
           {%- endfor -%}
         </div>

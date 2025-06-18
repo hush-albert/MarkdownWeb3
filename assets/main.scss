@@ -26,3 +26,22 @@ body {
 }
 
 .site-nav .page-link { color: var(--text-color); line-height: 1.5; } */
+
+/* Copilot: Jekyll 依顯示器大小自動橫向排列 youtube embedded
+*/
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* Copilot: 要 align left
+  */
+  justify-content: flex-start;
+}
+
+.video-container iframe {
+  flex: 1 1 300px;
+  max-width: 300px;
+  /* Copilot: 影片要有 border
+  */
+  border: 3px solid #333;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
