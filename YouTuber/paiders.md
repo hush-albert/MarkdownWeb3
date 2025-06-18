@@ -1,3 +1,9 @@
+---
+layout: page
+title: 樂趣咖啡館
+order: 4
+permalink: /paiders/
+---
 #### This is a story of four friends.<br>They are actually one with four bodies.<br>Running a coffee shop is the target if there is any.
 
 我走上街，人行道上有一個深洞，我掉了進去。我迷失了 … 我絕望了。
