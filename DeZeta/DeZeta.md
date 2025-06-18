@@ -5,7 +5,7 @@ order: 1
 permalink: /DeZeta/
 ---
 # 願景 (Vision)
-透過 DeZeta<br>(Decentralized Zero-trust identity verification-authentication system and method)<br>去中心化零信任身份核實認證系統與方法<br>保護你我的數位足跡
+透過「去中心化零信任身份核實認證系統與方法」－ DeZeta<br>(Decentralized Zero-trust identity verification-authentication system and method)<br>保護你我的數位足跡
 
 # 成立宗旨
 目前的身份認證方法，存在著使用者必須將可以證明身份的秘密留存在銀行端主機或是使用者裝置 (例如手機) 上的問題，而且過份依賴某一端的安全性來避免被盜用。

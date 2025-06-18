@@ -4,7 +4,9 @@ title: 樂趣咖啡館
 order: 4
 permalink: /paiders/
 ---
-#### This is a story of four friends.<br>They are actually one with four bodies.<br>Running a coffee shop is the target if there is any.
+This is a story of four friends.<br>They are actually one with four bodies.<br>Running a coffee shop is the target if there is any.
+
+![](../assets/images/lama20.jpg)
 
 我走上街，人行道上有一個深洞，我掉了進去。我迷失了 … 我絕望了。
 這不是我的錯，費了好大的勁才爬出來。
@@ -17,8 +19,9 @@ permalink: /paiders/
 
 我走上另一條街。
 
-<人生五章>，節錄自「西藏生死書」
+＜人生五章＞，節錄自「西藏生死書」
 
 Lama laughed a lot. Since we all experienced …
 
 # 鐵塔咖啡 café51
+![](../assets/images/cafe51.jpg)
