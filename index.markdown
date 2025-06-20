@@ -22,6 +22,9 @@ chat-title: "Agentic AI"
     </div>
 </div>
 
+<input type="file" id="file-input" accept="image/*" multiple>
+<button class="upload-btn" onclick="document.getElementById('file-input').click()">選擇圖片</button>
+
 <button id="showImage">秀圖</button>
 
 <div class="jDiv" style="display:none">
@@ -37,4 +40,5 @@ chat-title: "Agentic AI"
     -->
     <script type="module" src="./assets/js/j2.js"></script>
     <script type="module" src="./assets/js/ds_chat.js"></script>
+    <script type="module" src="./assets/js/ds_upload_img.js"></script>
 </div>

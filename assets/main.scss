@@ -9,6 +9,7 @@
 - 檔名可以加底線（例如 _buttons.scss），這樣 Jekyll 會知道它是部分檔案（partial），不會單獨編譯成 CSS。
 */
 @import "_ds_chat";
+@import "_ds_upload_img";
 
 /* Copilot: main.scss 中指定 dark
 */
