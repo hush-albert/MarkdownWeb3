@@ -4,6 +4,12 @@
 
 @import "minima";
 
+/* Copilot: Jekyll main.mcss 加入其他 css file
+- 所有被 @import 的檔案建議放在 _sass/ 資料夾中。
+- 檔名可以加底線（例如 _buttons.scss），這樣 Jekyll 會知道它是部分檔案（partial），不會單獨編譯成 CSS。
+*/
+@import "_ds_chat";
+
 /* Copilot: main.scss 中指定 dark
 */
 /* 默认浅色模式
