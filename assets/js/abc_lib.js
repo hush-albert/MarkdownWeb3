@@ -1,8 +1,8 @@
 import showStatus     from './ds_upload_img_lib.js';    // 預設導出
 import displayMessage from './ds_chat_lib.js';          // 預設導出
 
-let url = 'http://127.0.0.1:8080'
-// let url = 'https://aws.holymap.com.tw'
+// let url = 'http://127.0.0.1:8080'
+let url = 'https://aws.holymap.com.tw'
 
 // DeepSeek: 從 js trigger flask +++++++++++++++++++++++++++++++++++++++++++++++
 // Copilot:: js 取得目前的 url
