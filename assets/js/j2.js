@@ -24,6 +24,11 @@ for(i = 0; i < j1Elements.length; i++) { j1Elements[i].innerHTML = innerHTML[i];
 for(i = 0; i < j1Elements.length; i++) { j1Elements[i].innerHTML = "";           j1Elements[i].style.display = 'none'; } }
 }
 */
+// ChatGPT: github pages display: none 在 safari 無效
+// GitHub Pages 有 CDN 快取機制
+// Safari 本身又極度 aggressive 快取 CSS 和 JS
+//
+// [abc] 測試 container 顯示與隱藏對 Safari 有效，對 img 無效
 btnShowImage.onclick = () => {
     for(i = 0; i < jContainer.length; i++) {
         if (jContainer[i].style.display == 'inline') {
