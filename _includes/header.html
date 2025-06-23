@@ -1,6 +1,9 @@
 <header class="site-header" role="banner">
-
   <div class="wrapper">
+    <!-- Gemini: 網站的大圖示如何設定
+    -->
+    <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Logo" width="106" height="70">
+    <br>
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
     <!-- Copilot: Jekyll nav 順序

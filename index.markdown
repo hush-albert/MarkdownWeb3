@@ -38,6 +38,7 @@ chat-title: "Agentic AI"
     module 的意思是告訴瀏覽器：這是一個 ES6 模組（ES Module），而不是傳統的 JavaScript 腳本。
     這種寫法解鎖了許多現代 JavaScript 的強大功能，以下是它的幾個關鍵意義：
     -->
+    <script type="module" src="./assets/js/abc_def.js"></script>
     <script type="module" src="./assets/js/j2.js"></script>
     <script type="module" src="./assets/js/ds_chat.js"></script>
     <script type="module" src="./assets/js/ds_upload_img.js"></script>

@@ -5,7 +5,7 @@
 .chat-container {
     width: 100%;
     max-width: 800px;
-    height: 80vh;
+    height: 50vh;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -63,6 +63,12 @@
     border: 1px solid #ddd;
     border-radius: 20px;
     outline: none;
+
+    /* ChatGPT: 如何 disable 手機網頁輸入時自動放大
+    在手機網頁中，尤其是 iPhone/Safari 上，當你點擊輸入框（<input> 或 <textarea>）時，瀏覽器可能會自動放大畫面，
+    這對 UI 設計很困擾。這其實是因為蘋果為了提高可讀性，會自動放大文字小於 16px 的輸入欄位。
+    */
+    font-size: 16px;
 }
 
 #send-button {

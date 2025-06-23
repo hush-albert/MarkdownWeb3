@@ -2,12 +2,23 @@
 layout: page
 title: 樂趣咖啡館
 order: 4
-permalink: /paiders/
+permalink: /Paiders/
 ---
-This is a story of four friends.<br>They are actually one with four bodies.<br>Running a coffee shop is the target if there is any.
+<!-- Copilot: html 圖旁邊文字方塊 -->
+<div style="display: flex; align-items: center; padding: 10px;">
+  <img src="../assets/images/Paiders.png" alt="Paiders" style="float: left; margin-right: 10px;" width="128" height="128">
+  <div style="background-color: #f0f0f0; padding: 10px;">
+    <!-- 這是圖片旁邊的文字方塊，可以放任何內容。你可以透過 `margin-right` 設定圖片與文字之間的間距。-->
+    <p>This is a story of four friends.<br>They are actually one with four bodies.<br>Running a coffee shop is the target if there is any.</p>
+  </div>
+</div>
+<h1 style="text-align: center;">樂趣自行車</h1>
+<img src="../assets/images/樂趣自行車.png" alt="樂趣自行車" style="display: block; margin: 0 auto;">
+<br><br>
+![](../assets/images/Rex20170707.jpg)
 
-![](../assets/images/lama20.jpg)
-
+---
+<br>
 我走上街，人行道上有一個深洞，我掉了進去。我迷失了 … 我絕望了。
 這不是我的錯，費了好大的勁才爬出來。
 
