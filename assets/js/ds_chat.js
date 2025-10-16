@@ -1,5 +1,7 @@
 import displayMessage from './ds_chat_lib.js';  // 預設導出
 import data2flask     from './abc_lib.js';      // 預設導出
+import { validateChatMessage, rateLimitCheck } from './security.js'; // 安全驗證
+import { debugLog, debugError } from './abc_def.js'; // 調試工具
 
 // Copilot: html 傳參數到 js module
 // 注意：data-user-id 會轉換成 dataset.userId（駝峰式命名）。
@@ -13,22 +15,53 @@ const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 
 document.addEventListener('DOMContentLoaded', function() {
+    debugLog('CHAT', 'Chat module initialized', {
+        chatTitle: chatTitle,
+        inputElement: !!userInput,
+        sendButton: !!sendButton
+    });
+
     // 發送訊息函數
     function sendMessage() {
         const message = userInput.value.trim();
-        if (message === '') return;
+        debugLog('CHAT', 'Send message attempt', { 
+            messageLength: message.length,
+            hasContent: message.length > 0 
+        });
+        
+        // 檢查 rate limiting
+        if (!rateLimitCheck('chat', 20, 60000)) {  // 每分鐘最多 20 則訊息
+            debugLog('CHAT', 'Rate limit exceeded');
+            displayMessage('發送太頻繁，請稍後再試', 'bot');
+            return;
+        }
+        
+        // 驗證輸入
+        const validation = validateChatMessage(message);
+        if (!validation.valid) {
+            debugError('CHAT', 'Validation failed', validation.error);
+            displayMessage(validation.error, 'bot');
+            return;
+        }
+        
+        const safeMessage = validation.message;
+        debugLog('CHAT', 'Message validated successfully', { 
+            original: message,
+            safe: safeMessage 
+        });
 
         const data = {
             "UserID"    : "string",
-            "message"   : message
+            "message"   : safeMessage
         }
+        debugLog('CHAT', 'Sending to API', data);
         data2flask('json', data);
 
-        // 顯示用戶訊息
-        displayMessage(message, 'user');
+        // 顯示用戶訊息（使用已轉義的安全訊息）
+        displayMessage(safeMessage, 'user');
         userInput.value = '';
+        debugLog('CHAT', 'Message sent and UI updated');
 
-        data2flask()
         /* 模擬機器人回覆 (可替換為實際的API調用)
         setTimeout(() => {
             const botResponse = generateBotResponse(message);

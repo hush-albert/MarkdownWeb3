@@ -24,11 +24,12 @@ chat-title: "Agentic AI"
 
 <input type="file" id="file-input" accept="image/*" multiple>
 <button class="upload-btn" onclick="document.getElementById('file-input').click()">選擇圖片</button>
+<div id="status" class="status" style="display: none;"></div>
 
 <button id="showImage">秀圖</button>
 
 <div class="jDiv" style="display:none">
-    <img class="jImg" src="./assets/images/abc.jpg">
+    <img class="jImg" src="{{ '/assets/images/abc.jpg' | relative_url }}">
 </div>
 
 <!-- Copilot: html 傳參數到 js module ++++++++++++++++++++++++++++++++++++++++++
@@ -38,6 +39,10 @@ chat-title: "Agentic AI"
     module 的意思是告訴瀏覽器：這是一個 ES6 模組（ES Module），而不是傳統的 JavaScript 腳本。
     這種寫法解鎖了許多現代 JavaScript 的強大功能，以下是它的幾個關鍵意義：
     -->
+    <script type="module" src="./assets/js/security.js"></script>
+    <script type="module" src="./assets/js/errorHandler.js"></script>
+    <script type="module" src="./assets/js/apiConfig.js"></script>
+    <script type="module" src="./assets/js/cspHandler.js"></script>
     <script type="module" src="./assets/js/abc_def.js"></script>
     <script type="module" src="./assets/js/j2.js"></script>
     <script type="module" src="./assets/js/ds_chat.js"></script>

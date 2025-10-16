@@ -9,7 +9,7 @@ permalink: /YouTuber/
 
 ---
 <br>
-![](../assets/images/黑猩猩碼頭20210722a.gif)
+![]({{ '/assets/images/黑猩猩碼頭20210722a.gif' | relative_url }})
 <div class="video-container">
     <iframe width="300" height="200" src="https://www.youtube.com/embed/oLC5syYiJdM" frameborder="0" allowfullscreen></iframe>
     <iframe width="300" height="200" src="https://www.youtube.com/embed/1KWjoK1f2s8" frameborder="0" allowfullscreen></iframe>

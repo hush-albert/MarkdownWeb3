@@ -1,10 +1,6 @@
-import showStatus     from './ds_upload_img_lib.js';    // 預設導出
 import displayMessage from './ds_chat_lib.js';          // 預設導出
-import { DEBUG }      from './abc_def.js';
-
-let        url;
-if (DEBUG) url = 'http://127.0.0.1:8080'
-else       url = 'https://aws.holymap.com.tw'
+import errorHandler   from './errorHandler.js';         // 統一錯誤處理
+import apiConfig, { getApiUrl, getRequestConfig } from './apiConfig.js'; // API 配置
 
 // DeepSeek: 從 js trigger flask +++++++++++++++++++++++++++++++++++++++++++++++
 // Copilot:: js 取得目前的 url
@@ -14,45 +10,75 @@ export default function data2flask(type, data) {
 
         // AIGC (Artificial Intelligence Generated Content)
         case 'json':
-            fetch(url+'/api/aigc', {
-                method: 'POST',
+            const chatConfig = getRequestConfig('POST', {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
-            })
+            });
+
+            // 直接使用 fetch 調用 API
+            fetch(getApiUrl('chat'), chatConfig)
             .then(response => {
-                if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
+                if (!response.ok) { 
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`); 
+                }
                 return response.json();
             })
             .then(data => {
-                if ("ReplyMsg" in data) displayMessage(data.ReplyMsg, 'bot');
-                else displayMessage('對話失敗', 'bot');
+                if ("ReplyMsg" in data) {
+                    displayMessage(data.ReplyMsg, 'bot');
+                } else {
+                    throw new Error('伺服器回應格式錯誤');
+                }
             })
-            .catch(error => displayMessage('連線失敗: ' + error.message, 'bot'));
+            .catch(error => {
+                console.error('API Error:', error);
+                
+                errorHandler.handleError(error, 'api', {
+                    endpoint: 'chat',
+                    requestData: data
+                });
+            });
             break
 
         // image identification
         case 'form':
             const formData = new FormData();
             formData.append('file', data);
-            displayMessage('檔案上傳中，給我幾秒鐘比對一下 ...', 'bot');
+            displayMessage('檔案上傳中，請稍候...', 'bot');
 
-            fetch(url+'/api/identify', {
-                method: 'POST',
-                // 注意：使用 FormData 時通常不需要設置 Content-Type 標頭
-                // 瀏覽器會自動設置正確的 multipart/form-data 邊界
+            const uploadConfig = getRequestConfig('POST', {
                 body: formData
-            })
+                // 注意：FormData 不需要設置 Content-Type
+            });
+
+            // 直接使用 fetch 調用 API
+            fetch(getApiUrl('upload'), uploadConfig)
             .then(response => {
-                if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
+                if (!response.ok) { 
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`); 
+                }
                 return response.json();
             })
             .then(data => {
-                if ("Model" in data) displayMessage('您上傳的是 ' + data.Model, 'bot');
-                else displayMessage('識別失敗', 'bot');
-
+                if ("Model" in data) {
+                    displayMessage('您上傳的是 ' + data.Model, 'bot');
+                } else {
+                    throw new Error('識別結果格式錯誤');
+                }
             })
-            .catch(error => showStatus('上傳失敗: ' + error.message, 'error'));
-                    break;
+            .catch(error => {
+                console.error('Upload API Error:', error);
+                
+                errorHandler.handleError(error, 'api', {
+                    endpoint: 'upload',
+                    fileInfo: {
+                        name: data.name,
+                        size: data.size,
+                        type: data.type
+                    }
+                });
+            });
+            break;
         default:
           // 如果沒有匹配的值，執行這段代碼
           return;

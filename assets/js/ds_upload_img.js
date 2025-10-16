@@ -1,5 +1,7 @@
 import data2flask from './abc_lib.js';              // 預設導出
-import showStatus from './ds_upload_img_lib.js';    // 預設導出
+import displayMessage from './ds_chat_lib.js';     // 聊天訊息顯示函數
+import { validateFileUpload, rateLimitCheck } from './security.js'; // 安全驗證
+import { debugLog, debugError } from './abc_def.js'; // 調試工具
 
 // DeepSeek: 用 js 寫一個可以上傳圖片檔的網頁 ++++++++++++++++++++++++++++++++++
 //
@@ -12,9 +14,9 @@ const dropArea = document.getElementById('drop-area'); */
 // 存儲選擇的文件
 let files = [];
 
-// 監聽文件選擇事件
+// 監聽文件選擇事件 (使用 async 版本)
 fileInput.addEventListener('change', function(e) {
-    handleFiles(e.target.files);
+    handleFilesAsync(e.target.files);
 });
 
 /* 拖放功能
@@ -33,73 +35,88 @@ dropArea.addEventListener('drop', function(e) {
     handleFiles(e.dataTransfer.files);
 }); */
 
-// 處理選擇的文件
-function handleFiles(selectedFiles) {
-    /* 清空預覽區域
-    previewContainer.innerHTML = ''; */
+// 檢查檔案頭以驗證是否為真實的圖片檔案
+function isValidImageFile(file) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const arr = new Uint8Array(e.target.result).subarray(0, 4);
+            let header = '';
+            for (let i = 0; i < arr.length; i++) {
+                header += arr[i].toString(16);
+            }
+            
+            // 檢查檔案頭
+            const validHeaders = [
+                'ffd8ffe0', 'ffd8ffe1', 'ffd8ffe2', 'ffd8ffe3', 'ffd8ffe8', // JPEG
+                '89504e47', // PNG
+                '47494638', // GIF
+                '52494646', // WebP (RIFF)
+                '424d'      // BMP
+            ];
+            
+            resolve(validHeaders.some(validHeader => header.startsWith(validHeader)));
+        };
+        reader.readAsArrayBuffer(file.slice(0, 4));
+    });
+}
+
+// 使用 async/await 來處理檔案驗證
+async function handleFilesAsync(selectedFiles) {
     files = [];
+    debugLog('UPLOAD', 'File selection started', { 
+        fileCount: selectedFiles.length 
+    });
 
-    /* 檢查是否有文件
     if (selectedFiles.length === 0) {
-        uploadBtn.disabled = true;
+        debugLog('UPLOAD', 'No files selected');
+        displayMessage('請選擇至少一個檔案', 'bot');
         return;
-    } */
-
-    // 過濾非圖片文件
-    for (let i = 0; i < selectedFiles.length; i++) {
-        const file = selectedFiles[i];
-        if (!file.type.match('image.*')) {
-            showStatus(`文件 "${file.name}" 不是圖片格式`, 'error');
-            continue;
-        }
-        files.push(file);
     }
 
-    /* 顯示預覽
-    if (files.length > 0) {
-        uploadBtn.disabled = false;
+    if (!rateLimitCheck('upload', 5, 60000)) {
+        debugLog('UPLOAD', 'Rate limit exceeded');
+        displayMessage('上傳太頻繁，請稍後再試', 'bot');
+        return;
+    }
 
-        files.forEach((file, index) => {
-            const reader = new FileReader();
-                    
-            reader.onload = function(e) {
-                const previewItem = document.createElement('div');
-                previewItem.className = 'preview-item';
+    const file = selectedFiles[0];
+    debugLog('UPLOAD', 'Processing file', { 
+        name: file.name, 
+        size: file.size, 
+        type: file.type 
+    });
+    
+    const validation = validateFileUpload(file);
+    if (!validation.valid) {
+        debugError('UPLOAD', 'File validation failed', validation.error);
+        displayMessage(validation.error, 'bot');
+        return;
+    }
 
-                const img = document.createElement('img');
-                img.className = 'preview-img';
-                img.src = e.target.result;
-                img.alt = file.name;
+    // 檢查檔案頭
+    debugLog('UPLOAD', 'Starting file header validation');
+    const isValid = await isValidImageFile(file);
+    if (!isValid) {
+        debugError('UPLOAD', 'File header validation failed');
+        displayMessage('檔案不是有效的圖片格式', 'bot');
+        return;
+    }
 
-                const removeBtn = document.createElement('button');
-                removeBtn.className = 'remove-btn';
-                removeBtn.innerHTML = '×';
-                removeBtn.onclick = function() {
-                    files.splice(index, 1);
-                    previewContainer.removeChild(previewItem);
-                    if (files.length === 0) {
-                        uploadBtn.disabled = true;
-                    }
-                };
-
-                previewItem.appendChild(img);
-                previewItem.appendChild(removeBtn);
-                previewContainer.appendChild(previewItem);
-            };
-
-            reader.readAsDataURL(file);
-        });
-    } else {
-        uploadBtn.disabled = true;
-    } */
-
-    // 調用 data2flask 函數進行上傳處理
-    data2flask('form', files[0]);
-    // 重置表單
-    files = []; /*
-    previewContainer.innerHTML = '';
-    uploadBtn.disabled = true;
-    fileInput.value = ''; */
+    files.push(file);
+    debugLog('UPLOAD', 'File validation completed successfully', { 
+        fileName: file.name 
+    });
+    displayMessage(`檔案 "${file.name}" 驗證通過，正在上傳...`, 'bot');
+    
+    debugLog('UPLOAD', 'Starting file upload to API');
+    data2flask('form', file);
+    
+    setTimeout(() => {
+        files = [];
+        fileInput.value = '';
+        debugLog('UPLOAD', 'Upload process completed, form reset');
+    }, 1000);
 }
 
 /* 上傳按鈕點擊事件

@@ -4,6 +4,12 @@ const statusDiv = document.getElementById('status');
 
 // 顯示狀態消息
 export default function showStatus(message, type) {
+    // 檢查元素是否存在
+    if (!statusDiv) {
+        console.error('Status element not found. Make sure there is a <div id="status"> in the HTML.');
+        return;
+    }
+    
     statusDiv.style.display = 'block';
     statusDiv.textContent = message;
     statusDiv.className = 'status';

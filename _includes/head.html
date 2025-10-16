@@ -2,6 +2,47 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- 安全標頭 - 根據環境調整 -->
+  {% if jekyll.environment == "development" or site.url contains "127.0.0.1" or site.url contains "localhost" %}
+  <!-- 開發環境：寬鬆的 CSP 設定 -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://*.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src 'self' data: https: http:;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' https: http: ws: wss:;
+    frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  ">
+  {% else %}
+  <!-- 正式環境：嚴格的 CSP 設定 -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://www.youtube.com https://*.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    img-src 'self' data: https: http:;
+    font-src 'self' https://fonts.gstatic.com;
+    connect-src 'self' 
+      https://aws.holymap.com.tw 
+      http://127.0.0.1:8080;
+    frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+  ">
+  {% endif %}
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <!-- X-Frame-Options 改用 CSP frame-ancestors 指令處理 -->
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+  
   {%- seo -%}
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   <!-- Copilot: github pages minima favicon
